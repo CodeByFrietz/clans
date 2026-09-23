@@ -3,150 +3,70 @@
 
 <head>
 
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-    <title>Clans | CinderSMP</title>
+  <title>Clans | CinderSMP</title>
 
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 
 </head>
 
-
 <body>
-
 
 <header class="navbar">
 
-    <a href="index.html" class="logo">
-        🔥 CinderSMP
-    </a>
+  <a class="logo" href="index.html">
+    🔥 Cinder<span>SMP</span>
+  </a>
 
-
-    <nav>
-
-        <a href="index.html">
-            Home
-        </a>
-
-        <a
-            href="clans.html"
-            class="active"
-        >
-            Clans
-        </a>
-
-        <a href="tournaments.html">
-            Tournaments
-        </a>
-
-        <a href="activity.html">
-            Activity
-        </a>
-
-    </nav>
+  <nav>
+    <a href="index.html">Home</a>
+    <a class="active" href="clans.html">Clans</a>
+    <a href="tournaments.html">Tournaments</a>
+    <a href="activity.html">Activity</a>
+  </nav>
 
 </header>
 
+<main class="page">
 
+  <section class="page-header">
 
-<main>
+    <span class="eyebrow">CINDERSMP</span>
 
-
-<section class="page-header">
-
-    <span>COMMUNITY</span>
-
-    <h1>
-        CinderSMP Clans
-    </h1>
+    <h1>Clan Directory</h1>
 
     <p>
-        Discover the clans of CinderSMP.
+      Discover the clans fighting for dominance.
     </p>
 
-</section>
+    <a
+      href="create-clan.html"
+      class="primary-btn inline-btn"
+    >
+      🔥 Create Clan
+    </a>
 
+  </section>
 
+  <section id="clanGrid" class="clan-grid">
 
-<section class="section">
-
-
-    <div class="create-section">
-
-        <div>
-
-            <span>START YOUR CLAN</span>
-
-            <h2>
-                Create your clan.
-            </h2>
-
-            <p>
-                Build your team and represent your clan
-                on CinderSMP.
-            </p>
-
-        </div>
-
-
-        <a
-            href="create-clan.html"
-            class="button primary"
-        >
-            🔥 Create Clan
-        </a>
-
+    <div class="loading">
+      <div class="loader"></div>
+      Loading clans...
     </div>
 
-
-
-    <div class="clan-grid">
-
-        <!-- JavaScript puts clans here -->
-
-    </div>
-
-
-</section>
-
+  </section>
 
 </main>
 
-
-
-<footer>
-
-
-    <div>
-
-        <strong>
-            🔥 CinderSMP
-        </strong>
-
-        <p>
-            Clan community website.
-        </p>
-
-    </div>
-
-
-    <p>
-        © 2026 CinderSMP
-    </p>
-
-
-</footer>
-
-
-
+<script src="supabase.js"></script>
 <script src="script.js"></script>
 
-
 </body>
-
 </html>
