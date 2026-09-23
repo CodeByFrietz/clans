@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Create Clan | CinderSMP</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+<header class="navbar">
+
+    <a href="index.html" class="logo">
+        🔥 CinderSMP
+    </a>
+
+    <nav>
+
+        <a href="index.html">
+            Home
+        </a>
+
+        <a href="clans.html">
+            Clans
+        </a>
+
+        <a href="tournaments.html">
+            Tournaments
+        </a>
+
+        <a href="activity.html">
+            Activity
+        </a>
+
+    </nav>
+
+</header>
+
+
+<main>
+
+<section class="page-header">
+
+    <span>CREATE</span>
+
+    <h1>Create Your Clan</h1>
+
+    <p>
+        Create your clan and represent yourself on CinderSMP.
+    </p>
+
+</section>
+
+
+<section class="form-section">
+
+    <form id="createClanForm">
+
+
+        <div class="form-group">
+
+            <label for="clanName">
+                Clan Name
+            </label>
+
+            <input
+                type="text"
+                id="clanName"
+                placeholder="Example: Shadow"
+                maxlength="30"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="clanTag">
+                Clan Tag
+            </label>
+
+            <input
+                type="text"
+                id="clanTag"
+                placeholder="Example: SHD"
+                maxlength="5"
+                required
+            >
+
+            <small>
+                Maximum 5 characters.
+            </small>
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="leader">
+                Minecraft Username
+            </label>
+
+            <input
+                type="text"
+                id="leader"
+                placeholder="Your Minecraft username"
+                maxlength="16"
+                required
+            >
+
+        </div>
+
+
+        <div class="form-group">
+
+            <label for="description">
+                Clan Description
+            </label>
+
+            <textarea
+                id="description"
+                placeholder="Tell everyone about your clan..."
+                maxlength="200"
+                rows="5"
+            ></textarea>
+
+        </div>
+
+
+        <button
+            type="submit"
+            class="button primary"
+        >
+            🔥 Create Clan
+        </button>
+
+
+        <p
+            id="formMessage"
+            class="form-message"
+        ></p>
+
+
+    </form>
+
+</section>
+
+</main>
+
+
+<footer>
+
+    <div>
+        <strong>🔥 CinderSMP</strong>
+
+        <p>
+            Clan community website.
+        </p>
+    </div>
+
+    <p>
+        © 2026 CinderSMP
+    </p>
+
+</footer>
+
+
+<script src="script.js"></script>
+
+</body>
+
+</html>
