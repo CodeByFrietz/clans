@@ -1,23 +1,39 @@
-/*
-    CinderSMP Clan System
-*/
+/* ==================================================
+   CINDERSMP CLAN WEBSITE
+   STAGE 2A
+   ================================================== */
 
 
-/* =========================
+/* ==================================================
    STORAGE
-========================= */
+   ================================================== */
 
 function getClans() {
 
-    const clans =
+    const saved =
         localStorage.getItem("cindersmp_clans");
 
-    if (!clans) {
+    if (!saved) {
         return [];
     }
 
-    return JSON.parse(clans);
+    try {
+
+        return JSON.parse(saved);
+
+    } catch (error) {
+
+        console.error(
+            "Could not read clans:",
+            error
+        );
+
+        return [];
+
+    }
+
 }
+
 
 
 function saveClans(clans) {
@@ -30,39 +46,94 @@ function saveClans(clans) {
 }
 
 
-/* =========================
-   SECURITY
-========================= */
 
-function escapeHTML(value) {
+/* ==================================================
+   ACTIVITY STORAGE
+   ================================================== */
 
-    const div =
-        document.createElement("div");
+function getActivity() {
 
-    div.textContent =
-        value ?? "";
+    const saved =
+        localStorage.getItem(
+            "cindersmp_activity"
+        );
 
-    return div.innerHTML;
+    if (!saved) {
+        return [];
+    }
+
+    try {
+
+        return JSON.parse(saved);
+
+    } catch (error) {
+
+        console.error(
+            "Could not read activity:",
+            error
+        );
+
+        return [];
+
+    }
 
 }
 
 
-/* =========================
+
+function saveActivity(activity) {
+
+    localStorage.setItem(
+        "cindersmp_activity",
+        JSON.stringify(activity)
+    );
+
+}
+
+
+
+/* ==================================================
+   SECURITY
+   Prevent HTML injection when displaying user input
+   ================================================== */
+
+function escapeHTML(value) {
+
+    const element =
+        document.createElement("div");
+
+    element.textContent =
+        value ?? "";
+
+    return element.innerHTML;
+
+}
+
+
+
+/* ==================================================
    CREATE CLAN
-========================= */
+   ================================================== */
 
 const createClanForm =
-    document.getElementById("createClanForm");
+    document.getElementById(
+        "createClanForm"
+    );
 
 
 if (createClanForm) {
 
+
     createClanForm.addEventListener(
         "submit",
-        function(event) {
+        function (event) {
 
             event.preventDefault();
 
+
+            /* ------------------------------------------
+               GET FORM VALUES
+               ------------------------------------------ */
 
             const name =
                 document
@@ -99,7 +170,16 @@ if (createClanForm) {
                 );
 
 
-            if (!name || !tag || !leader) {
+
+            /* ------------------------------------------
+               BASIC VALIDATION
+               ------------------------------------------ */
+
+            if (
+                !name ||
+                !tag ||
+                !leader
+            ) {
 
                 message.textContent =
                     "Please fill in all required fields.";
@@ -112,23 +192,15 @@ if (createClanForm) {
             }
 
 
-            let clans = getClans();
 
+            /* ------------------------------------------
+               CLAN NAME VALIDATION
+               ------------------------------------------ */
 
-            /* Prevent duplicate clan names */
-
-            const nameExists =
-                clans.some(
-                    clan =>
-                        clan.name.toLowerCase() ===
-                        name.toLowerCase()
-                );
-
-
-            if (nameExists) {
+            if (name.length < 2) {
 
                 message.textContent =
-                    "A clan with this name already exists.";
+                    "Clan name must be at least 2 characters.";
 
                 message.className =
                     "form-message error";
@@ -138,17 +210,135 @@ if (createClanForm) {
             }
 
 
-            /* Prevent duplicate tags */
 
-            const tagExists =
+            /* ------------------------------------------
+               TAG VALIDATION
+               ------------------------------------------ */
+
+            if (
+                tag.length < 2 ||
+                tag.length > 5
+            ) {
+
+                message.textContent =
+                    "Clan tag must be between 2 and 5 characters.";
+
+                message.className =
+                    "form-message error";
+
+                return;
+
+            }
+
+
+
+            /* ------------------------------------------
+               TAG CHARACTERS
+               ------------------------------------------ */
+
+            const validTag =
+                /^[A-Z0-9]+$/;
+
+
+            if (!validTag.test(tag)) {
+
+                message.textContent =
+                    "Clan tag can only contain letters and numbers.";
+
+                message.className =
+                    "form-message error";
+
+                return;
+
+            }
+
+
+
+            /* ------------------------------------------
+               MINECRAFT USERNAME
+               ------------------------------------------ */
+
+            const validMinecraftUsername =
+                /^[A-Za-z0-9_]+$/;
+
+
+            if (
+                !validMinecraftUsername.test(
+                    leader
+                )
+            ) {
+
+                message.textContent =
+                    "Minecraft username contains invalid characters.";
+
+                message.className =
+                    "form-message error";
+
+                return;
+
+            }
+
+
+
+            /* ------------------------------------------
+               GET EXISTING CLANS
+               ------------------------------------------ */
+
+            const clans =
+                getClans();
+
+
+
+            /* ------------------------------------------
+               CHECK NAME
+               ------------------------------------------ */
+
+            const duplicateName =
                 clans.some(
-                    clan =>
-                        clan.tag.toLowerCase() ===
-                        tag.toLowerCase()
+                    function (clan) {
+
+                        return (
+                            clan.name
+                                .toLowerCase() ===
+                            name.toLowerCase()
+                        );
+
+                    }
                 );
 
 
-            if (tagExists) {
+            if (duplicateName) {
+
+                message.textContent =
+                    "That clan name is already being used.";
+
+                message.className =
+                    "form-message error";
+
+                return;
+
+            }
+
+
+
+            /* ------------------------------------------
+               CHECK TAG
+               ------------------------------------------ */
+
+            const duplicateTag =
+                clans.some(
+                    function (clan) {
+
+                        return (
+                            clan.tag.toLowerCase() ===
+                            tag.toLowerCase()
+                        );
+
+                    }
+                );
+
+
+            if (duplicateTag) {
 
                 message.textContent =
                     "That clan tag is already being used.";
@@ -161,12 +351,17 @@ if (createClanForm) {
             }
 
 
-            /* Create clan */
+
+            /* ------------------------------------------
+               CREATE CLAN OBJECT
+               ------------------------------------------ */
 
             const newClan = {
 
                 id:
-                    Date.now().toString(),
+                    crypto.randomUUID
+                    ? crypto.randomUUID()
+                    : Date.now().toString(),
 
                 name:
                     name,
@@ -191,26 +386,37 @@ if (createClanForm) {
             };
 
 
-            clans.push(newClan);
+
+            /* ------------------------------------------
+               SAVE CLAN
+               ------------------------------------------ */
+
+            clans.push(
+                newClan
+            );
 
 
-            saveClans(clans);
+            saveClans(
+                clans
+            );
 
 
-            /* Save activity */
 
-            const activities =
-                JSON.parse(
-                    localStorage.getItem(
-                        "cindersmp_activity"
-                    ) || "[]"
-                );
+            /* ------------------------------------------
+               CREATE ACTIVITY
+               ------------------------------------------ */
+
+            const activity =
+                getActivity();
 
 
-            activities.unshift({
+            activity.unshift({
+
+                id:
+                    Date.now().toString(),
 
                 message:
-                    `${name} [${tag}] was created.`,
+                    `${name} [${tag}] was created by ${leader}.`,
 
                 createdAt:
                     new Date().toISOString()
@@ -218,11 +424,15 @@ if (createClanForm) {
             });
 
 
-            localStorage.setItem(
-                "cindersmp_activity",
-                JSON.stringify(activities)
+            saveActivity(
+                activity
             );
 
+
+
+            /* ------------------------------------------
+               SUCCESS
+               ------------------------------------------ */
 
             message.textContent =
                 "🔥 Clan created successfully!";
@@ -231,11 +441,13 @@ if (createClanForm) {
                 "form-message success";
 
 
-            createClanForm.reset();
 
+            /* ------------------------------------------
+               REDIRECT
+               ------------------------------------------ */
 
             setTimeout(
-                function() {
+                function () {
 
                     window.location.href =
                         "clans.html";
@@ -250,14 +462,18 @@ if (createClanForm) {
 }
 
 
-/* =========================
-   DISPLAY CLANS
-========================= */
+
+/* ==================================================
+   LOAD CLANS
+   ================================================== */
 
 function loadClans() {
 
+
     const clanGrid =
-        document.querySelector(".clan-grid");
+        document.querySelector(
+            ".clan-grid"
+        );
 
 
     if (!clanGrid) {
@@ -269,13 +485,15 @@ function loadClans() {
         getClans();
 
 
-    /*
-        Remove the example clans.
-        Real clans will now be generated here.
-    */
+    /* Clear existing example clans */
 
     clanGrid.innerHTML = "";
 
+
+
+    /* ------------------------------------------
+       NO CLANS
+       ------------------------------------------ */
 
     if (clans.length === 0) {
 
@@ -292,7 +510,7 @@ function loadClans() {
                 </h2>
 
                 <p>
-                    Be the first person to create a clan.
+                    Be the first clan on CinderSMP.
                 </p>
 
                 <br>
@@ -301,7 +519,7 @@ function loadClans() {
                     href="create-clan.html"
                     class="button primary"
                 >
-                    Create Clan
+                    🔥 Create Clan
                 </a>
 
             </div>
@@ -313,11 +531,19 @@ function loadClans() {
     }
 
 
+
+    /* ------------------------------------------
+       DISPLAY CLANS
+       ------------------------------------------ */
+
     clans.forEach(
-        function(clan) {
+        function (clan) {
+
 
             const card =
-                document.createElement("div");
+                document.createElement(
+                    "div"
+                );
 
 
             card.className =
@@ -334,36 +560,52 @@ function loadClans() {
 
                     <h2>
 
-                        ${escapeHTML(clan.name)}
+                        ${escapeHTML(
+                            clan.name
+                        )}
 
                         <small>
-                            [${escapeHTML(clan.tag)}]
+                            [${escapeHTML(
+                                clan.tag
+                            )}]
                         </small>
 
                     </h2>
 
                     <p>
+
                         ${
                             escapeHTML(
                                 clan.description ||
                                 "No description."
                             )
                         }
+
                     </p>
 
                     <div class="clan-info">
 
                         👑
-                        ${escapeHTML(clan.leader)}
+                        ${escapeHTML(
+                            clan.leader
+                        )}
 
                         ·
 
                         👥
-                        ${clan.members.length}
+                        ${
+                            clan.members
+                                ? clan.members.length
+                                : 1
+                        }
+
                         member${
-                            clan.members.length === 1
-                                ? ""
-                                : "s"
+                            (
+                                clan.members &&
+                                clan.members.length !== 1
+                            )
+                                ? "s"
+                                : ""
                         }
 
                     </div>
@@ -373,7 +615,10 @@ function loadClans() {
             `;
 
 
-            clanGrid.appendChild(card);
+            clanGrid.appendChild(
+                card
+            );
+
 
         }
     );
@@ -381,14 +626,18 @@ function loadClans() {
 }
 
 
-/* =========================
-   ACTIVITY
-========================= */
+
+/* ==================================================
+   LOAD ACTIVITY
+   ================================================== */
 
 function loadActivity() {
 
+
     const activityList =
-        document.querySelector(".activity-list");
+        document.querySelector(
+            ".activity-list"
+        );
 
 
     if (!activityList) {
@@ -396,36 +645,67 @@ function loadActivity() {
     }
 
 
-    const activities =
-        JSON.parse(
-            localStorage.getItem(
-                "cindersmp_activity"
-            ) || "[]"
-        );
+    const activity =
+        getActivity();
 
 
-    if (activities.length === 0) {
+
+    /* ------------------------------------------
+       NO ACTIVITY
+       ------------------------------------------ */
+
+    if (activity.length === 0) {
+
+        activityList.innerHTML = `
+
+            <div class="empty-state">
+
+                <div class="empty-icon">
+                    📢
+                </div>
+
+                <h2>
+                    No activity yet
+                </h2>
+
+                <p>
+                    Clan activity will appear here.
+                </p>
+
+            </div>
+
+        `;
+
         return;
+
     }
 
+
+
+    /* ------------------------------------------
+       DISPLAY ACTIVITY
+       ------------------------------------------ */
 
     activityList.innerHTML = "";
 
 
-    activities
-        .slice(0, 20)
+    activity
+        .slice(0, 30)
         .forEach(
-            function(activity) {
-
-                const item =
-                    document.createElement("div");
+            function (item) {
 
 
-                item.className =
+                const element =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                element.className =
                     "activity-item";
 
 
-                item.innerHTML = `
+                element.innerHTML = `
 
                     <div class="activity-icon">
                         🔥
@@ -434,12 +714,12 @@ function loadActivity() {
                     <div>
 
                         ${escapeHTML(
-                            activity.message
+                            item.message
                         )}
 
                         <small>
                             ${formatDate(
-                                activity.createdAt
+                                item.createdAt
                             )}
                         </small>
 
@@ -448,7 +728,10 @@ function loadActivity() {
                 `;
 
 
-                activityList.appendChild(item);
+                activityList.appendChild(
+                    element
+                );
+
 
             }
         );
@@ -456,24 +739,33 @@ function loadActivity() {
 }
 
 
-/* =========================
-   DATE
-========================= */
+
+/* ==================================================
+   DATE FORMAT
+   ================================================== */
 
 function formatDate(date) {
 
-    const time =
+
+    const parsedDate =
         new Date(date);
 
 
-    return time.toLocaleString();
+    return parsedDate.toLocaleString(
+        undefined,
+        {
+            dateStyle: "medium",
+            timeStyle: "short"
+        }
+    );
 
 }
 
 
-/* =========================
-   START
-========================= */
+
+/* ==================================================
+   START WEBSITE
+   ================================================== */
 
 loadClans();
 
