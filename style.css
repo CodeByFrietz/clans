@@ -1,853 +1,1370 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+
+  --bg: #060606;
+
+  --card: #101010;
+
+  --card2: #151515;
+
+  --border: #292929;
+
+  --text: #ffffff;
+
+  --muted: #999999;
+
+  --accent: #ff6a00;
+
+  --accent2: #ff2600;
+
+  --danger: #ff3030;
+
+  --success: #38d878;
+
 }
 
 
-:root {
-    --bg: #080808;
-    --card: #111111;
-    --card2: #161616;
-    --border: #292929;
-
-    --text: #ffffff;
-    --muted: #999999;
-
-    --accent: #ff6a00;
-    --accent2: #ff3c00;
+* {
+  box-sizing: border-box;
 }
 
 
 html {
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 
 
 body {
-    background: var(--bg);
-    color: var(--text);
 
-    font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
+  margin: 0;
 
-    min-height: 100vh;
+  min-height: 100vh;
+
+  color: var(--text);
+
+  background:
+
+    radial-gradient(
+      circle at 50% -20%,
+      rgba(255, 80, 0, .15),
+      transparent 45%
+    ),
+
+    var(--bg);
+
+  font-family: Inter, Arial, sans-serif;
+
 }
 
 
-/* NAVBAR */
+body::before {
+
+  content: "";
+
+  position: fixed;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background-image:
+
+    radial-gradient(
+      circle,
+      rgba(255, 100, 0, .12) 1px,
+      transparent 1px
+    );
+
+  background-size: 42px 42px;
+
+  opacity: .25;
+
+  animation: backgroundMove 20s linear infinite;
+
+}
+
+
+@keyframes backgroundMove {
+
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(42px);
+  }
+
+}
+
+
+/* =========================
+   NAVBAR
+========================= */
 
 .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  position: sticky;
 
-    padding: 18px 6%;
+  top: 0;
 
-    background: rgba(8, 8, 8, 0.92);
+  z-index: 100;
 
-    border-bottom: 1px solid var(--border);
+  display: flex;
 
-    backdrop-filter: blur(10px);
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 16px 6%;
+
+  background: rgba(6, 6, 6, .82);
+
+  backdrop-filter: blur(16px);
+
+  border-bottom: 1px solid rgba(255,255,255,.08);
+
 }
 
 
 .logo {
-    color: white;
 
-    font-size: 20px;
-    font-weight: 800;
+  color: white;
 
-    text-decoration: none;
+  text-decoration: none;
+
+  font-weight: 800;
+
+  font-size: 20px;
+
 }
 
 
-nav {
-    display: flex;
-    gap: 24px;
+.logo span {
+
+  color: var(--accent);
+
 }
 
 
-nav a {
-    color: var(--muted);
+.navbar nav {
 
-    text-decoration: none;
+  display: flex;
 
-    font-size: 14px;
-    font-weight: 600;
+  gap: 18px;
 
-    transition: 0.2s;
+  flex-wrap: wrap;
+
 }
 
 
-nav a:hover,
-nav a.active {
-    color: white;
+.navbar nav a {
+
+  color: #aaa;
+
+  text-decoration: none;
+
+  font-size: 14px;
+
+  transition: .2s;
+
 }
 
 
-/* HERO */
+.navbar nav a:hover,
+.navbar nav a.active {
 
-.hero {
-    min-height: 650px;
+  color: white;
 
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    text-align: center;
-
-    padding: 80px 20px;
-
-    background:
-        radial-gradient(
-            circle at center,
-            rgba(255, 80, 0, 0.16),
-            transparent 55%
-        );
 }
 
 
-.hero-content {
-    max-width: 800px;
+/* =========================
+   PAGE
+========================= */
+
+.page {
+
+  width: min(1100px, 92%);
+
+  margin: auto;
+
+  padding: 80px 0;
+
 }
 
-
-.badge,
-.page-header span,
-.section-title span,
-.create-section span,
-.tournament-banner span {
-    display: inline-block;
-
-    color: var(--accent);
-
-    font-size: 12px;
-    font-weight: 800;
-
-    letter-spacing: 2px;
-}
-
-
-.hero h1 {
-    margin-top: 20px;
-
-    font-size: clamp(42px, 8vw, 82px);
-
-    line-height: 0.98;
-
-    font-weight: 900;
-}
-
-
-.hero h1 span {
-    color: var(--accent);
-}
-
-
-.hero p {
-    max-width: 600px;
-
-    margin: 28px auto;
-
-    color: var(--muted);
-
-    font-size: 18px;
-
-    line-height: 1.7;
-}
-
-
-/* BUTTONS */
-
-.hero-buttons {
-    display: flex;
-
-    justify-content: center;
-
-    gap: 12px;
-
-    flex-wrap: wrap;
-}
-
-
-.button {
-    display: inline-block;
-
-    padding: 14px 22px;
-
-    border-radius: 8px;
-
-    text-decoration: none;
-
-    font-weight: 800;
-
-    border: none;
-
-    cursor: pointer;
-}
-
-
-.button.primary {
-    background: var(--accent);
-
-    color: white;
-}
-
-
-.button.primary:hover {
-    background: var(--accent2);
-}
-
-
-.button.secondary {
-    background: var(--card2);
-
-    color: white;
-
-    border: 1px solid var(--border);
-}
-
-
-/* SECTIONS */
-
-.section {
-    max-width: 1100px;
-
-    margin: auto;
-
-    padding: 90px 6%;
-}
-
-
-.section-title {
-    margin-bottom: 45px;
-}
-
-
-.section-title h2 {
-    margin: 10px 0;
-
-    font-size: 38px;
-}
-
-
-.section-title p {
-    color: var(--muted);
-}
-
-
-/* CARDS */
-
-.cards {
-    display: grid;
-
-    grid-template-columns:
-        repeat(4, 1fr);
-
-    gap: 16px;
-}
-
-
-.card {
-    padding: 28px;
-
-    background: var(--card);
-
-    border: 1px solid var(--border);
-
-    border-radius: 12px;
-
-    transition: 0.2s;
-}
-
-
-.card:hover {
-    transform: translateY(-4px);
-
-    border-color: #444;
-}
-
-
-.card-icon {
-    font-size: 32px;
-
-    margin-bottom: 22px;
-}
-
-
-.card h3 {
-    margin-bottom: 10px;
-}
-
-
-.card p {
-    color: var(--muted);
-
-    line-height: 1.6;
-
-    font-size: 14px;
-}
-
-
-/* ACTIVITY */
-
-.activity-list {
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 10px;
-}
-
-
-.activity-item {
-    display: flex;
-
-    align-items: center;
-
-    gap: 15px;
-
-    padding: 18px;
-
-    background: var(--card);
-
-    border: 1px solid var(--border);
-
-    border-radius: 10px;
-
-    color: #ddd;
-}
-
-
-.activity-icon {
-    width: 42px;
-    height: 42px;
-
-    display: flex;
-
-    align-items: center;
-    justify-content: center;
-
-    flex-shrink: 0;
-
-    background: var(--card2);
-
-    border-radius: 8px;
-}
-
-
-.activity-item strong {
-    color: white;
-}
-
-
-.activity-item small {
-    display: block;
-
-    margin-top: 5px;
-
-    color: var(--muted);
-}
-
-
-.view-more {
-    display: inline-block;
-
-    margin-top: 20px;
-
-    color: var(--accent);
-
-    text-decoration: none;
-
-    font-weight: 700;
-}
-
-
-/* TOURNAMENT BANNER */
-
-.tournament-banner,
-.create-section {
-    max-width: 1100px;
-
-    margin: 30px auto 90px;
-
-    padding: 45px;
-
-    display: flex;
-
-    justify-content: space-between;
-
-    align-items: center;
-
-    gap: 30px;
-
-    background:
-        linear-gradient(
-            135deg,
-            #18100c,
-            #100c0a
-        );
-
-    border: 1px solid #3b2115;
-
-    border-radius: 16px;
-}
-
-
-.tournament-banner h2,
-.create-section h2 {
-    margin: 8px 0;
-
-    font-size: 32px;
-}
-
-
-.tournament-banner p,
-.create-section p {
-    color: var(--muted);
-}
-
-
-/* PAGE HEADER */
 
 .page-header {
-    text-align: center;
 
-    padding: 100px 20px 60px;
+  text-align: center;
 
-    background:
-        radial-gradient(
-            circle,
-            rgba(255, 80, 0, 0.12),
-            transparent 60%
-        );
+  margin-bottom: 50px;
+
+  animation: fadeUp .7s ease both;
+
+}
+
+
+.eyebrow {
+
+  display: inline-block;
+
+  color: var(--accent);
+
+  font-size: 11px;
+
+  font-weight: 800;
+
+  letter-spacing: 2px;
+
+  margin-bottom: 10px;
+
 }
 
 
 .page-header h1 {
-    margin: 15px 0;
 
-    font-size: clamp(40px, 7vw, 65px);
+  margin: 0;
+
+  font-size: clamp(38px, 8vw, 68px);
+
+  line-height: 1;
+
+  letter-spacing: -3px;
+
 }
 
 
 .page-header p {
-    color: var(--muted);
 
-    font-size: 17px;
+  color: var(--muted);
+
+  max-width: 600px;
+
+  margin: 18px auto;
+
+  line-height: 1.7;
+
 }
 
 
-/* CLANS */
+/* =========================
+   BUTTONS
+========================= */
+
+.primary-btn {
+
+  display: inline-flex;
+
+  align-items: center;
+
+  justify-content: center;
+
+  border: 0;
+
+  border-radius: 12px;
+
+  padding: 14px 20px;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--accent),
+      var(--accent2)
+    );
+
+  font-weight: 800;
+
+  cursor: pointer;
+
+  text-decoration: none;
+
+  box-shadow:
+    0 0 25px rgba(255,80,0,.2);
+
+  transition:
+    transform .2s,
+    box-shadow .2s;
+
+}
+
+
+.primary-btn:hover {
+
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 0 35px rgba(255,80,0,.4);
+
+}
+
+
+.inline-btn {
+  margin-top: 15px;
+}
+
+
+.danger-btn {
+
+  width: 100%;
+
+  padding: 13px;
+
+  border: 1px solid rgba(255,48,48,.4);
+
+  border-radius: 10px;
+
+  color: #ff7777;
+
+  background: rgba(255,40,40,.08);
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: .2s;
+
+}
+
+
+.danger-btn:hover {
+
+  background: rgba(255,40,40,.16);
+
+  transform: translateY(-2px);
+
+}
+
+
+.danger-small {
+
+  border: 1px solid rgba(255,48,48,.3);
+
+  border-radius: 8px;
+
+  background: transparent;
+
+  color: #ff7070;
+
+  padding: 7px 9px;
+
+  cursor: pointer;
+
+}
+
+
+/* =========================
+   CLANS
+========================= */
 
 .clan-grid {
-    display: grid;
 
-    grid-template-columns:
-        repeat(2, 1fr);
+  display: grid;
 
-    gap: 15px;
+  grid-template-columns:
+    repeat(
+      auto-fit,
+      minmax(270px, 1fr)
+    );
+
+  gap: 20px;
+
 }
 
 
 .clan-card {
-    display: flex;
 
-    gap: 20px;
+  position: relative;
 
-    padding: 25px;
+  overflow: hidden;
 
-    background: var(--card);
+  display: block;
 
-    border: 1px solid var(--border);
+  color: white;
 
-    border-radius: 12px;
+  text-decoration: none;
+
+  padding: 25px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255,255,255,.05),
+      rgba(255,255,255,.015)
+    );
+
+  transition:
+    transform .3s,
+    border-color .3s,
+    box-shadow .3s;
+
+  animation: fadeUp .6s ease both;
+
 }
 
 
-.clan-symbol {
-    width: 60px;
-    height: 60px;
+.clan-card:hover {
 
-    display: flex;
+  transform:
+    translateY(-8px)
+    scale(1.01);
 
-    align-items: center;
-    justify-content: center;
+  border-color:
+    rgba(255,100,0,.5);
 
-    flex-shrink: 0;
+  box-shadow:
+    0 20px 60px
+    rgba(255,70,0,.12);
 
-    background: var(--card2);
+}
 
-    border-radius: 12px;
 
-    font-size: 28px;
+.clan-glow {
+
+  position: absolute;
+
+  width: 150px;
+
+  height: 150px;
+
+  top: -80px;
+
+  right: -60px;
+
+  background: var(--accent);
+
+  filter: blur(70px);
+
+  opacity: .15;
+
+}
+
+
+.clan-card-top {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+}
+
+
+.clan-tag {
+
+  color: var(--accent);
+
+  font-weight: 800;
+
+  font-size: 13px;
+
+}
+
+
+.member-count {
+
+  color: #aaa;
+
+  font-size: 13px;
+
 }
 
 
 .clan-card h2 {
-    margin-bottom: 7px;
-}
 
+  font-size: 27px;
 
-.clan-card h2 small {
-    color: var(--accent);
+  margin: 25px 0 10px;
 
-    font-size: 12px;
 }
 
 
 .clan-card p {
-    color: var(--muted);
 
-    margin-bottom: 15px;
-}
+  color: var(--muted);
 
+  line-height: 1.6;
 
-.clan-info {
-    color: #bbb;
-
-    font-size: 13px;
-}
-
-
-/* EMPTY STATE */
-
-.empty-state {
-    text-align: center;
-
-    padding: 80px 20px;
-
-    background: var(--card);
-
-    border: 1px solid var(--border);
-
-    border-radius: 14px;
-}
-
-
-.empty-icon {
-    font-size: 50px;
-
-    margin-bottom: 20px;
-}
-
-
-.empty-state h2 {
-    margin-bottom: 10px;
-}
-
-
-.empty-state p {
-    color: var(--muted);
-}
-
-
-/* FOOTER */
-
-footer {
-    display: flex;
-
-    justify-content: space-between;
-
-    gap: 30px;
-
-    padding: 40px 6%;
-
-    border-top: 1px solid var(--border);
-
-    color: var(--muted);
-
-    font-size: 13px;
-}
-
-
-footer strong {
-    color: white;
-
-    font-size: 16px;
-}
-
-
-footer p {
-    margin-top: 8px;
-}
-
-
-/* MOBILE */
-
-@media (max-width: 800px) {
-
-    .navbar {
-        flex-direction: column;
-
-        gap: 15px;
-    }
-
-
-    nav {
-        gap: 15px;
-
-        flex-wrap: wrap;
-
-        justify-content: center;
-    }
-
-
-    .cards {
-        grid-template-columns: 1fr;
-    }
-
-
-    .clan-grid {
-        grid-template-columns: 1fr;
-    }
-
-
-    .tournament-banner,
-    .create-section {
-        margin-left: 20px;
-        margin-right: 20px;
-
-        flex-direction: column;
-
-        align-items: flex-start;
-    }
-
-
-    footer {
-        flex-direction: column;
-    }
+  min-height: 50px;
 
 }
 
 
-@media (max-width: 450px) {
+.clan-card-bottom {
 
-    nav {
-        gap: 10px;
-    }
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-top: 25px;
+
+  padding-top: 18px;
+
+  border-top: 1px solid var(--border);
+
+  color: #aaa;
+
+  font-size: 13px;
+
+}
 
 
-    nav a {
-        font-size: 12px;
-    }
+.view-clan {
+
+  color: var(--accent);
+
+  font-weight: 700;
+
+}
 
 
-    .hero {
-        min-height: 580px;
-    }
+/* =========================
+   CLAN PAGE
+========================= */
+
+.clan-hero {
+
+  position: relative;
+
+  overflow: hidden;
+
+  display: grid;
+
+  grid-template-columns: auto 1fr auto;
+
+  align-items: center;
+
+  gap: 30px;
+
+  padding: 45px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 25px;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255,80,0,.08),
+      rgba(255,255,255,.025)
+    );
+
+  animation: fadeUp .6s ease both;
+
+}
 
 
-    .hero p {
-        font-size: 15px;
-    }
+.clan-hero-glow {
+
+  position: absolute;
+
+  width: 300px;
+
+  height: 300px;
+
+  background: var(--accent);
+
+  filter: blur(130px);
+
+  opacity: .1;
+
+  top: -180px;
+
+  left: -100px;
+
+}
 
 
-    .section {
-        padding-top: 60px;
-        padding-bottom: 60px;
-    }
-   /* =========================================
-   CREATE CLAN FORM
-   ========================================= */
+.big-clan-tag {
+
+  display: grid;
+
+  place-items: center;
+
+  width: 100px;
+
+  height: 100px;
+
+  border: 1px solid rgba(255,100,0,.4);
+
+  border-radius: 22px;
+
+  color: var(--accent);
+
+  font-size: 22px;
+
+  font-weight: 900;
+
+  background: rgba(255,80,0,.06);
+
+  box-shadow:
+    inset 0 0 30px rgba(255,80,0,.05);
+
+}
+
+
+.clan-hero h1 {
+
+  margin: 5px 0;
+
+  font-size: clamp(36px, 7vw, 58px);
+
+  letter-spacing: -2px;
+
+}
+
+
+.clan-hero p {
+
+  color: var(--muted);
+
+  line-height: 1.6;
+
+}
+
+
+.clan-stats {
+
+  display: flex;
+
+  gap: 25px;
+
+}
+
+
+.clan-stats div {
+
+  text-align: center;
+
+}
+
+
+.clan-stats strong {
+
+  display: block;
+
+  font-size: 25px;
+
+}
+
+
+.clan-stats span {
+
+  color: #888;
+
+  font-size: 12px;
+
+}
+
+
+.clan-content {
+
+  display: grid;
+
+  grid-template-columns: 1fr 330px;
+
+  gap: 25px;
+
+  margin-top: 25px;
+
+}
+
+
+.members-panel,
+.info-card,
+.owner-controls {
+
+  border: 1px solid var(--border);
+
+  border-radius: 20px;
+
+  background: var(--card);
+
+  padding: 25px;
+
+}
+
+
+.section-heading {
+
+  display: flex;
+
+  justify-content: space-between;
+
+  align-items: center;
+
+  margin-bottom: 20px;
+
+}
+
+
+.section-heading h2 {
+
+  margin: 0;
+
+}
+
+
+.member-total {
+
+  display: grid;
+
+  place-items: center;
+
+  width: 38px;
+
+  height: 38px;
+
+  border-radius: 10px;
+
+  background: rgba(255,100,0,.1);
+
+  color: var(--accent);
+
+  font-weight: 800;
+
+}
+
+
+.member-list {
+
+  display: grid;
+
+  gap: 10px;
+
+}
+
+
+.member-row {
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  padding: 13px;
+
+  border: 1px solid rgba(255,255,255,.06);
+
+  border-radius: 13px;
+
+  background: rgba(255,255,255,.025);
+
+  animation: fadeUp .4s ease both;
+
+}
+
+
+.member-avatar {
+
+  display: grid;
+
+  place-items: center;
+
+  width: 40px;
+
+  height: 40px;
+
+  border-radius: 10px;
+
+  background: rgba(255,100,0,.1);
+
+}
+
+
+.member-info {
+
+  flex: 1;
+
+}
+
+
+.member-info strong {
+
+  display: block;
+
+}
+
+
+.member-info span {
+
+  color: #777;
+
+  font-size: 11px;
+
+}
+
+
+.owner-badge {
+
+  color: var(--accent);
+
+  font-size: 9px;
+
+  font-weight: 900;
+
+  letter-spacing: 1px;
+
+}
+
+
+.clan-sidebar {
+
+  display: grid;
+
+  gap: 20px;
+
+  align-content: start;
+
+}
+
+
+.info-card h3,
+.owner-controls h3 {
+
+  margin-top: 4px;
+
+}
+
+
+.owner-display {
+
+  padding: 14px;
+
+  border-radius: 12px;
+
+  background: rgba(255,255,255,.04);
+
+  font-weight: 700;
+
+}
+
+
+.mini-form {
+
+  display: grid;
+
+  gap: 10px;
+
+}
+
+
+.mini-form input {
+
+  width: 100%;
+
+}
+
+
+/* =========================
+   FORMS
+========================= */
 
 .form-section {
 
-    max-width: 650px;
+  max-width: 650px;
 
-    margin: 0 auto;
+  margin: auto;
 
-    padding:
-        20px
-        20px
-        100px;
+  padding: 30px;
 
-}
+  border: 1px solid var(--border);
 
+  border-radius: 22px;
 
-.form-section form {
+  background: var(--card);
 
-    background: var(--card);
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius: 14px;
-
-    padding: 30px;
+  animation: fadeUp .6s ease both;
 
 }
 
 
 .form-group {
 
-    margin-bottom: 24px;
+  margin-bottom: 20px;
 
 }
 
 
-.form-group label {
+label {
 
-    display: block;
+  display: block;
 
-    margin-bottom: 8px;
+  margin-bottom: 8px;
 
-    color: white;
+  color: #ccc;
 
-    font-size: 14px;
+  font-size: 13px;
 
-    font-weight: 700;
-
-}
-
-
-.form-group input,
-.form-group textarea {
-
-    width: 100%;
-
-    padding: 14px;
-
-    background: #0a0a0a;
-
-    color: white;
-
-    border:
-        1px solid
-        var(--border);
-
-    border-radius: 8px;
-
-    outline: none;
-
-    font-family: inherit;
-
-    font-size: 15px;
+  font-weight: 700;
 
 }
 
 
-.form-group input:focus,
-.form-group textarea:focus {
+input,
+textarea {
 
-    border-color:
-        var(--accent);
+  width: 100%;
+
+  padding: 14px 15px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 11px;
+
+  outline: none;
+
+  color: white;
+
+  background: #090909;
+
+  font: inherit;
+
+  transition: .2s;
 
 }
 
 
-.form-group textarea {
+textarea {
 
-    resize: vertical;
+  min-height: 130px;
 
-    min-height: 120px;
+  resize: vertical;
 
 }
 
 
-.form-group small {
+input:focus,
+textarea:focus {
 
-    display: block;
+  border-color: var(--accent);
 
-    margin-top: 7px;
-
-    color: var(--muted);
-
-    font-size: 12px;
+  box-shadow:
+    0 0 0 3px rgba(255,100,0,.08);
 
 }
 
 
 .form-message {
 
-    margin-top: 18px;
+  min-height: 20px;
 
-    font-size: 14px;
+  margin-top: 14px;
 
-    font-weight: 700;
+  color: #aaa;
+
+  font-size: 13px;
 
 }
 
 
 .form-message.success {
 
-    color: #4ade80;
+  color: var(--success);
 
 }
 
 
 .form-message.error {
 
-    color: #ff5c5c;
+  color: #ff7070;
 
 }
 
 
-/* =========================================
-   CREATE SECTION
-   ========================================= */
+/* =========================
+   AUTH
+========================= */
 
-.create-section {
+.auth-page {
 
-    margin:
-        0 0 35px 0;
+  min-height: calc(100vh - 70px);
+
+  display: grid;
+
+  place-items: center;
+
+  padding: 30px;
 
 }
 
 
-/* =========================================
-   EMPTY STATE
-   ========================================= */
+.auth-card {
+
+  width: min(440px, 100%);
+
+  padding: 35px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 24px;
+
+  background: var(--card);
+
+  box-shadow:
+    0 30px 100px rgba(0,0,0,.4);
+
+  animation: fadeUp .6s ease both;
+
+}
+
+
+.auth-card h1 {
+
+  margin-bottom: 8px;
+
+}
+
+
+.auth-card > p {
+
+  color: var(--muted);
+
+}
+
+
+.auth-card form {
+
+  margin-top: 25px;
+
+}
+
+
+.auth-card form .primary-btn {
+
+  width: 100%;
+
+  margin-top: 10px;
+
+}
+
+
+.auth-icon {
+
+  font-size: 45px;
+
+  margin-bottom: 10px;
+
+}
+
+
+.auth-switch {
+
+  text-align: center;
+
+  margin-top: 25px;
+
+  font-size: 13px;
+
+}
+
+
+.auth-switch a {
+
+  color: var(--accent);
+
+  font-weight: 700;
+
+}
+
+
+/* =========================
+   ACTIVITY
+========================= */
+
+.activity-list {
+
+  max-width: 800px;
+
+  margin: auto;
+
+  display: grid;
+
+  gap: 10px;
+
+}
+
+
+.activity-item {
+
+  display: flex;
+
+  gap: 15px;
+
+  align-items: center;
+
+  padding: 17px;
+
+  border: 1px solid var(--border);
+
+  border-radius: 15px;
+
+  background: var(--card);
+
+  animation: fadeUp .5s ease both;
+
+}
+
+
+.activity-icon {
+
+  display: grid;
+
+  place-items: center;
+
+  width: 42px;
+
+  height: 42px;
+
+  flex-shrink: 0;
+
+  border-radius: 12px;
+
+  background: rgba(255,100,0,.1);
+
+}
+
+
+.activity-content strong {
+
+  display: block;
+
+  font-size: 14px;
+
+}
+
+
+.activity-content span {
+
+  display: block;
+
+  margin-top: 5px;
+
+  color: #666;
+
+  font-size: 11px;
+
+}
+
+
+/* =========================
+   LOADING
+========================= */
+
+.loading {
+
+  grid-column: 1 / -1;
+
+  display: grid;
+
+  place-items: center;
+
+  gap: 15px;
+
+  padding: 80px;
+
+  color: #777;
+
+}
+
+
+.loader {
+
+  width: 35px;
+
+  height: 35px;
+
+  border: 3px solid #222;
+
+  border-top-color: var(--accent);
+
+  border-radius: 50%;
+
+  animation: spin .8s linear infinite;
+
+}
+
+
+@keyframes spin {
+
+  to {
+    transform: rotate(360deg);
+  }
+
+}
+
+
+/* =========================
+   EMPTY
+========================= */
 
 .empty-state {
 
-    grid-column:
-        1 / -1;
+  grid-column: 1 / -1;
 
-    text-align: center;
+  text-align: center;
 
-    padding: 70px 20px;
+  padding: 70px 20px;
 
-    background:
-        var(--card);
+  border: 1px dashed var(--border);
 
-    border:
-        1px solid
-        var(--border);
-
-    border-radius: 14px;
+  border-radius: 20px;
 
 }
 
 
 .empty-icon {
 
-    font-size: 50px;
+  font-size: 45px;
 
-    margin-bottom: 20px;
-
-}
-
-
-.empty-state h2 {
-
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 
 }
 
 
 .empty-state p {
 
-    color: var(--muted);
+  color: #777;
 
 }
+
+
+/* =========================
+   ANIMATIONS
+========================= */
+
+@keyframes fadeUp {
+
+  from {
+
+    opacity: 0;
+
+    transform: translateY(18px);
+
+  }
+
+  to {
+
+    opacity: 1;
+
+    transform: translateY(0);
+
+  }
+
+}
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+
+  .navbar {
+
+    align-items: flex-start;
+
+    flex-direction: column;
+
+    padding: 15px 5%;
+
+  }
+
+
+  .navbar nav {
+
+    width: 100%;
+
+    overflow-x: auto;
+
+    padding-bottom: 3px;
+
+  }
+
+
+  .navbar nav a {
+
+    white-space: nowrap;
+
+  }
+
+
+  .page {
+
+    padding: 55px 0;
+
+  }
+
+
+  .page-header h1 {
+
+    letter-spacing: -2px;
+
+  }
+
+
+  .clan-hero {
+
+    grid-template-columns: 1fr;
+
+    text-align: center;
+
+    padding: 30px 20px;
+
+  }
+
+
+  .big-clan-tag {
+
+    margin: auto;
+
+  }
+
+
+  .clan-stats {
+
+    justify-content: center;
+
+  }
+
+
+  .clan-content {
+
+    grid-template-columns: 1fr;
+
+  }
+
+
+  .form-section {
+
+    padding: 22px;
+
+  }
+
+
+  .member-row {
+
+    padding: 11px;
+
+  }
+
+
+  .danger-small {
+
+    font-size: 10px;
+
+  }
 
 }
