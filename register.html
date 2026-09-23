@@ -1,38 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
   <title>Register | CinderSMP</title>
-  <link rel="stylesheet" href="style.css">
+
+  <link
+    rel="stylesheet"
+    href="style.css"
+  >
+
 </head>
 
 <body>
 
 <header class="navbar">
+
   <a class="logo" href="index.html">
     🔥 Cinder<span>SMP</span>
   </a>
 
   <nav>
-    <a href="index.html">Home</a>
-    <a href="clans.html">Clans</a>
-    <a href="tournaments.html">Tournaments</a>
+
+    <a href="index.html">
+      Home
+    </a>
+
+    <a href="clans.html">
+      Clans
+    </a>
+
   </nav>
+
 </header>
+
 
 <main class="auth-page">
 
   <section class="auth-card">
 
-    <div class="auth-icon">🔥</div>
+    <div class="auth-icon">
+      🔥
+    </div>
 
-    <h1>Create Account</h1>
-    <p>Join CinderSMP and create your clan.</p>
+    <span class="eyebrow">
+      CINDERSMP
+    </span>
+
+    <h1>
+      Create Account
+    </h1>
+
+    <p>
+      Join the clan network.
+    </p>
+
 
     <form id="registerForm">
 
-      <label>Username</label>
+      <label>
+        Username
+      </label>
+
       <input
         id="username"
         type="text"
@@ -41,7 +77,11 @@
         required
       >
 
-      <label>Email</label>
+
+      <label>
+        Email
+      </label>
+
       <input
         id="email"
         type="email"
@@ -49,7 +89,11 @@
         required
       >
 
-      <label>Password</label>
+
+      <label>
+        Password
+      </label>
+
       <input
         id="password"
         type="password"
@@ -58,70 +102,42 @@
         required
       >
 
-      <button class="primary-btn" type="submit">
+
+      <button
+        class="primary-btn"
+        type="submit"
+      >
         🔥 Create Account
       </button>
 
-      <p id="authMessage" class="form-message"></p>
+
+      <p
+        id="formMessage"
+        class="form-message"
+      ></p>
 
     </form>
 
+
     <p class="auth-switch">
+
       Already have an account?
-      <a href="login.html">Login</a>
+
+      <a href="login.html">
+        Login
+      </a>
+
     </p>
 
   </section>
 
 </main>
 
-<script src="supabase.js"></script>
-<script src="script.js"></script>
 
-</body>
-</html>        id="username"
-        type="text"
-        maxlength="16"
-        placeholder="Minecraft username"
-        required
-      >
-
-      <label>Email</label>
-      <input
-        id="email"
-        type="email"
-        placeholder="you@example.com"
-        required
-      >
-
-      <label>Password</label>
-      <input
-        id="password"
-        type="password"
-        minlength="6"
-        placeholder="At least 6 characters"
-        required
-      >
-
-      <button class="primary-btn" type="submit">
-        🔥 Create Account
-      </button>
-
-      <p id="authMessage" class="form-message"></p>
-
-    </form>
-
-    <p class="auth-switch">
-      Already have an account?
-      <a href="login.html">Login</a>
-    </p>
-
-  </section>
-
-</main>
-
-<script src="supabase.js"></script>
-<script type="module" src="script.js"></script>
+<script
+  type="module"
+  src="script.js"
+></script>
 
 </body>
 </html>
