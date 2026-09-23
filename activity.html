@@ -3,121 +3,63 @@
 
 <head>
 
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-    <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0"
-    >
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-    <title>Activity | CinderSMP</title>
+  <title>Activity | CinderSMP</title>
 
-    <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css">
 
 </head>
 
-
 <body>
-
 
 <header class="navbar">
 
-    <a href="index.html" class="logo">
-        🔥 CinderSMP
-    </a>
+  <a class="logo" href="index.html">
+    🔥 Cinder<span>SMP</span>
+  </a>
 
-
-    <nav>
-
-        <a href="index.html">
-            Home
-        </a>
-
-        <a href="clans.html">
-            Clans
-        </a>
-
-        <a href="tournaments.html">
-            Tournaments
-        </a>
-
-        <a
-            href="activity.html"
-            class="active"
-        >
-            Activity
-        </a>
-
-    </nav>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="clans.html">Clans</a>
+    <a href="tournaments.html">Tournaments</a>
+    <a class="active" href="activity.html">Activity</a>
+  </nav>
 
 </header>
 
+<main class="page">
 
+  <section class="page-header">
 
-<main>
+    <span class="eyebrow">LIVE FEED</span>
 
-
-<section class="page-header">
-
-    <span>
-        WHAT'S HAPPENING
-    </span>
-
-    <h1>
-        Activity
-    </h1>
+    <h1>Clan Activity</h1>
 
     <p>
-        See what's happening across CinderSMP.
+      See what is happening across CinderSMP.
     </p>
 
-</section>
+  </section>
 
+  <section id="activityList" class="activity-list">
 
-
-<section class="section">
-
-
-    <div class="activity-list">
-
-        <!-- JavaScript loads activity here -->
-
+    <div class="loading">
+      <div class="loader"></div>
+      Loading activity...
     </div>
 
-
-</section>
-
+  </section>
 
 </main>
 
-
-
-<footer>
-
-    <div>
-
-        <strong>
-            🔥 CinderSMP
-        </strong>
-
-        <p>
-            Clan community website.
-        </p>
-
-    </div>
-
-
-    <p>
-        © 2026 CinderSMP
-    </p>
-
-</footer>
-
-
-
+<script src="supabase.js"></script>
 <script src="script.js"></script>
 
-
 </body>
-
 </html>
