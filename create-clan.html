@@ -108,4 +108,78 @@
 <script src="script.js"></script>
 
 </body>
+</html>  <section class="form-section">
+
+    <form id="createClanForm">
+
+      <div class="form-group">
+
+        <label>Clan Name</label>
+
+        <input
+          id="clanName"
+          type="text"
+          maxlength="30"
+          placeholder="Example: Night Raiders"
+          required
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Clan Tag</label>
+
+        <input
+          id="clanTag"
+          type="text"
+          maxlength="5"
+          placeholder="NR"
+          required
+        >
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Clan Description</label>
+
+        <textarea
+          id="description"
+          maxlength="200"
+          placeholder="Tell everyone what your clan is about..."
+        ></textarea>
+
+      </div>
+
+      <div class="form-group">
+
+        <label>Your Minecraft Username</label>
+
+        <input
+          id="leader"
+          type="text"
+          maxlength="16"
+          placeholder="Your Minecraft username"
+          required
+        >
+
+      </div>
+
+      <button class="primary-btn" type="submit">
+        🔥 Create Clan
+      </button>
+
+      <p id="formMessage" class="form-message"></p>
+
+    </form>
+
+  </section>
+
+</main>
+
+<script src="supabase.js"></script>
+<script src="script.js"></script>
+
+</body>
 </html>
