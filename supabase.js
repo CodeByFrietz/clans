@@ -1,8 +1,12 @@
-const SUPABASE_URL = "postgresql://postgres.kighvxotanotjyvhdlwy:[5hhtgXydF?/GbuD]@aws-0-ap-southeast-1.pooler.supabase.com:6543/postgres?pgbouncer=true
-  ";
-const SUPABASE_ANON_KEY = "postgresql://postgres.kighvxotanotjyvhdlwy:[5hhtgXydF?/GbuD]@aws-0-ap-southeast-1.pooler.supabase.com:5432/postgres";
+<script type="module">
+  import { createClient } from
+    "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
 
-const supabaseClient = window.supabase.createClient(
+  const SUPABASE_URL = "https://yoziukydjjmnvbvjdgvc.supabase.co";
+  const SUPABASE_KEY = "sb_secret_-gdC6ZEhAaFNVgqjR0gBIw_gDN1gEJA";
+
+  window.supabaseClient = createClient(
     SUPABASE_URL,
-    SUPABASE_ANON_KEY
-);
+    SUPABASE_KEY
+  );
+</script>
