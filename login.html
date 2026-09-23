@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login | CinderSMP</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<header class="navbar">
+  <a class="logo" href="index.html">
+    🔥 Cinder<span>SMP</span>
+  </a>
+
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="clans.html">Clans</a>
+    <a href="tournaments.html">Tournaments</a>
+  </nav>
+</header>
+
+<main class="auth-page">
+
+  <section class="auth-card">
+
+    <div class="auth-icon">⚔️</div>
+
+    <h1>Welcome Back</h1>
+    <p>Login to manage your CinderSMP clan.</p>
+
+    <form id="loginForm">
+
+      <label>Email</label>
+
+      <input
+        id="loginEmail"
+        type="email"
+        placeholder="you@example.com"
+        required
+      >
+
+      <label>Password</label>
+
+      <input
+        id="loginPassword"
+        type="password"
+        placeholder="Your password"
+        required
+      >
+
+      <button class="primary-btn" type="submit">
+        ⚔️ Login
+      </button>
+
+      <p id="authMessage" class="form-message"></p>
+
+    </form>
+
+    <p class="auth-switch">
+      Don't have an account?
+      <a href="register.html">Create one</a>
+    </p>
+
+  </section>
+
+</main>
+
+<script src="supabase.js"></script>
+<script src="script.js"></script>
+
+</body>
+</html>
