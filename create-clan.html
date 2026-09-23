@@ -4,6 +4,7 @@
 <head>
 
     <meta charset="UTF-8">
+
     <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"
@@ -18,11 +19,13 @@
 
 <body>
 
+
 <header class="navbar">
 
     <a href="index.html" class="logo">
         🔥 CinderSMP
     </a>
+
 
     <nav>
 
@@ -47,7 +50,9 @@
 </header>
 
 
+
 <main>
+
 
 <section class="page-header">
 
@@ -56,16 +61,20 @@
     <h1>Create Your Clan</h1>
 
     <p>
-        Create your clan and represent yourself on CinderSMP.
+        Create a clan and represent yourself on CinderSMP.
     </p>
 
 </section>
 
 
+
 <section class="form-section">
+
 
     <form id="createClanForm">
 
+
+        <!-- CLAN NAME -->
 
         <div class="form-group">
 
@@ -74,8 +83,8 @@
             </label>
 
             <input
-                type="text"
                 id="clanName"
+                type="text"
                 placeholder="Example: Shadow"
                 maxlength="30"
                 required
@@ -84,6 +93,9 @@
         </div>
 
 
+
+        <!-- CLAN TAG -->
+
         <div class="form-group">
 
             <label for="clanTag">
@@ -91,8 +103,8 @@
             </label>
 
             <input
-                type="text"
                 id="clanTag"
+                type="text"
                 placeholder="Example: SHD"
                 maxlength="5"
                 required
@@ -105,6 +117,9 @@
         </div>
 
 
+
+        <!-- LEADER -->
+
         <div class="form-group">
 
             <label for="leader">
@@ -112,15 +127,22 @@
             </label>
 
             <input
-                type="text"
                 id="leader"
+                type="text"
                 placeholder="Your Minecraft username"
                 maxlength="16"
                 required
             >
 
+            <small>
+                This will be displayed as the clan leader.
+            </small>
+
         </div>
 
+
+
+        <!-- DESCRIPTION -->
 
         <div class="form-group">
 
@@ -135,8 +157,15 @@
                 rows="5"
             ></textarea>
 
+            <small>
+                Maximum 200 characters.
+            </small>
+
         </div>
 
+
+
+        <!-- BUTTON -->
 
         <button
             type="submit"
@@ -146,6 +175,9 @@
         </button>
 
 
+
+        <!-- MESSAGE -->
+
         <p
             id="formMessage"
             class="form-message"
@@ -154,29 +186,41 @@
 
     </form>
 
+
 </section>
+
 
 </main>
 
 
+
 <footer>
 
+
     <div>
-        <strong>🔥 CinderSMP</strong>
+
+        <strong>
+            🔥 CinderSMP
+        </strong>
 
         <p>
             Clan community website.
         </p>
+
     </div>
+
 
     <p>
         © 2026 CinderSMP
     </p>
 
+
 </footer>
 
 
+
 <script src="script.js"></script>
+
 
 </body>
 
